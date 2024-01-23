@@ -17,4 +17,5 @@ while starts:   # Runs until all possible starting pairs have been depleted
 
 for bracelet in Bracelets:  # Prints all bracelets and lengths
     print(bracelet)
-    print(len(bracelet))
+    print(str(len(bracelet)) + "\n")
+print("Number of bracelets: " + str(len(Bracelets)))
