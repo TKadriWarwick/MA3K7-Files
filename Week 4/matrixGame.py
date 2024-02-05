@@ -1,10 +1,7 @@
 import numpy as np
 
-n = 3
-playerStarts = True
-playerIsZero = True
+def game(n: int, playerStarts: bool, playerIsZero: bool) -> None: 
 
-def game() -> None: 
     available = [[i,j] for i in range(n) for j in range(n)]
     board = [["_" for i in range(n)] for j in range(n)]
     playersGo = playerStarts
@@ -19,21 +16,22 @@ def game() -> None:
                 x = input("Please enter co-ordinate in correct format: ")
             x = [int(i.strip()) for i in x.split()]
             available.remove(x)
-            board[x[0]][x[1]] = int(playerIsZero)
+            board[x[0]][x[1]] = int(not playerIsZero)
             playersGo = False
         else:
             num = np.random.randint(0,len(available))
             x = available[num]
             print("Bot chooses: " + str(x))
             available.remove(x)
-            board[x[0]][x[1]] = int(not playerIsZero)
+            board[x[0]][x[1]] = int(playerIsZero)
             playersGo = True
+            
         for row in board:
             print("[{0}]".format(', '.join(map(str, row))))
                 
     det = np.linalg.det(board)
     print("The determinant is: " + str(det))
-    if det == int(playerIsZero):
+    if det == int(not playerIsZero):
         print("Player Wins!")
     else:
         print("Bot Wins.")
@@ -48,4 +46,5 @@ def isClean(string: str, arr: list) -> bool:
             clean = True
     return clean
 
-game()
+if __name__ == "__main__":
+    game(3, True, True)
