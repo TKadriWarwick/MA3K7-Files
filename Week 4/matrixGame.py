@@ -278,7 +278,7 @@ class smartestGame(game): # Uses all strategies discussed in the rubric
 
 
 if __name__ == "__main__":
-    game1 = smartestGame(2, False, False)
-    game2 = smarterGame(4, True, False)
-    game3 = randGame(4, True, False)
+    game1 = smartestGame(5, True, False)
+    game2 = smarterGame(4, False, True)
+    game3 = randGame(4, False, True)
     game1.play()
