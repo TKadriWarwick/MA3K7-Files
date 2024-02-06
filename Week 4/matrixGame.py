@@ -9,7 +9,7 @@ class game:
 
         self.reset()
 
-        self.dimThree = [
+        self.dimThree = [ # Encoded formula for n=3
             [[0,0], [1,1], [2,2]],
             [[0,1], [1,2], [2,0]],
             [[0,2], [1,0], [2,1]],
@@ -18,7 +18,7 @@ class game:
             [[0,2], [1,1], [2,0]]
         ]
 
-    def isClean(self, string: str, arr: list) -> bool:
+    def isClean(self, string: str, arr: list) -> bool: # Checks player input
         clean = False
         temp = string.split()
         if len(temp) == 2 and temp[0].isnumeric() and temp[1].isnumeric():
@@ -27,11 +27,11 @@ class game:
                 clean = True
         return clean
     
-    def printBoard(self) -> None:
+    def printBoard(self) -> None: # Prints the matrix
         for row in self.board:
             print("[{0}]".format(', '.join(map(str, row))))
 
-    def results(self) -> None:
+    def results(self) -> None: # Shows who is the winner
         det = np.linalg.det(self.board)
         print("The determinant is: " + str(det))
         if det == int(not self.playerIsZero):
@@ -39,7 +39,7 @@ class game:
         else:
             print("Bot Wins.")
 
-    def takePlayerInput(self) -> None:
+    def takePlayerInput(self) -> None: # Takes player imput until it's in the right format
         x = input("Enter co-ordinate: ")
         while self.isClean(x, self.available) == False:
             x = input("Please enter co-ordinate in correct format: ")
@@ -48,24 +48,24 @@ class game:
         self.board[x[0]][x[1]] = int(not self.playerIsZero)
         self.playersGo = False
 
-    def takeBotInput(self, x: list) -> None:
+    def takeBotInput(self, x: list) -> None: # Takes bot input
         print("Bot chooses: " + str(x))
         self.available.remove(x)
         self.board[x[0]][x[1]] = int(self.playerIsZero)
         self.playersGo = True
 
-    def randomMove(self) -> None:
+    def randomMove(self) -> None: # Makes the bot perform a random move
         num = np.random.randint(0,len(self.available))
         x = self.available[num]
         self.takeBotInput(x)
 
-    def reset(self) -> None:
+    def reset(self) -> None: # Resets the matrix to empty
         self.available = [[i,j] for i in range(self.dim) for j in range(self.dim)]
         self.board = [["_" for i in range(self.dim)] for j in range(self.dim)]
         self.playersGo = self.playerStarts
 
 
-class randGame(game): # Plays a random move
+class randGame(game): # Plays a random move when its the bots turn
     def play(self) -> None: 
 
         self.printBoard()
@@ -127,7 +127,7 @@ class smarterGame(game): # Notices if there will be a zero row/column
         
 
 
-class smartestGame(game):
+class smartestGame(game): # Uses all strategies discussed in the rubric
     def play(self) -> None:
 
         self.printBoard()
@@ -235,7 +235,7 @@ class smartestGame(game):
 
 
 
-        else: # Uses the same strategy as smarterGame if playing as ones or n=2
+        else: # Uses the same strategy as smarterGame if the bot is playing as ones
             while len(self.available) > 0:
                 if self.playersGo:
                     self.takePlayerInput()
