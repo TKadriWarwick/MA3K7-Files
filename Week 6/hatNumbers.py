@@ -1,9 +1,6 @@
 import numpy as np
 from collections import Counter
 
-hatSize = 4
-results = []
-
 def hatFunc(size: int) -> int: # Function that mimics the hat game and returns the final value
     nums = [(i+1) for i in range(size)]
     np.random.shuffle(nums) # Shuffles the numbers
@@ -16,9 +13,13 @@ def hatFunc(size: int) -> int: # Function that mimics the hat game and returns t
     return nums[0]
 
 if __name__ == "__main__":
-    for i in range(500):
+    hatSize = 2024
+    samples = 100
+    
+    results = []
+    for i in range(samples):
         results.append(hatFunc(hatSize))
 
     x = Counter(results)
-    sortedX = dict(sorted(x.items()))
+    sortedX = dict(sorted(x.items())) # Arranges the results into a dictionary
     print(sortedX)
