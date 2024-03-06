@@ -25,7 +25,7 @@ def trials(tile: int, steps: list, samples: int) -> dict:
     return Counter(results) # Returns a dictionary of the results and their occurences.
 
 
-def constantProb(tile: int) -> float: # works only for move set (1, 2)
+def constantProb(tile: int) -> float: # Works only for move set (1, 2)
 
     numerator = np.divide( (np.power(2, tile) - np.power(-1, tile % 2 )), 3 )
     denominator = np.power(2, tile-1)
